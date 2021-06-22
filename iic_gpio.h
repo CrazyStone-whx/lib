@@ -1,19 +1,20 @@
 #ifndef IIC_GPIO_H
 #define IIC_GPIO_H
 //iic-port
-#include "stm32f4xx_hal.h"
+#include "stm32f1xx_hal.h"
+
 void iic_gpio_Config(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, uint32_t Mode,  uint32_t Pull, uint32_t Speed);
-#define bI2cScl_Pin GPIO_PIN_8
+#define bI2cScl_Pin GPIO_PIN_6
 #define bI2cScl_Port GPIOB
 
-#define bI2cSda_Pin GPIO_PIN_9
+#define bI2cSda_Pin GPIO_PIN_7
 #define bI2cSda_Port GPIOB
 
-#define IIC_GPIO_SCL_SET(state)   HAL_GPIO_WritePin(bI2cScl_Port,bI2cScl_Pin,(state)?1:0) 
-#define IIC_GPIO_SDA_SET(state)   HAL_GPIO_WritePin(bI2cSda_Port,bI2cSda_Pin,(state)?1:0) 
-#define IIC_GPIO_SDA_GET_STATE()  HAL_GPIO_ReadPin(bI2cSda_Port, bI2cSda_Pin))?1:0)
+#define IIC_GPIO_SCL_SET(state)   HAL_GPIO_WritePin(bI2cScl_Port,bI2cScl_Pin,(state)?GPIO_PIN_SET:GPIO_PIN_RESET) 
+#define IIC_GPIO_SDA_SET(state)   HAL_GPIO_WritePin(bI2cSda_Port,bI2cSda_Pin,(state)?GPIO_PIN_SET:GPIO_PIN_RESET)
+#define IIC_GPIO_SDA_GET_STATE()  (HAL_GPIO_ReadPin(bI2cSda_Port, bI2cSda_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET)
 #define IIC_GPIO_SDA_MODE_CON(mode)   iic_gpio_Config (bI2cSda_Port, bI2cSda_Pin, mode?GPIO_MODE_OUTPUT_OD:GPIO_MODE_INPUT, \
- GPIO_PULLUP, GPIO_SPEED_FREQ_HIGH);
+ GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
 
 
 //

@@ -13,10 +13,10 @@ void iic_gpio_Config(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, uint32_t Mode,  ui
 
 void iic_gpio_init(void)
 {
-    iic_gpio_Config (bI2cSda_Port, bI2cSda_Pin, GPIO_MODE_OUTPUT_PP,
-            GPIO_PULLUP, GPIO_SPEED_FREQ_HIGH);
-    iic_gpio_Config (bI2cScl_Port, bI2cScl_Pin, GPIO_MODE_OUTPUT_PP,
-            GPIO_PULLUP, GPIO_SPEED_FREQ_HIGH);
+    iic_gpio_Config (bI2cSda_Port, bI2cSda_Pin, GPIO_MODE_OUTPUT_OD,
+            GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
+    iic_gpio_Config (bI2cScl_Port, bI2cScl_Pin, GPIO_MODE_OUTPUT_OD,
+            GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
     IIC_GPIO_SCL_SET(1);
     IIC_GPIO_SDA_SET(1);
 }
